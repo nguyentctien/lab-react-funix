@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import MoviesList from './components/MoviesList';
 import AddMovie from './components/AddMovie';
+import { FIREBASE_URL } from './util/firebase-url';
 import './App.css';
 
 function App() {
@@ -9,13 +10,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const firebaseURl = 'https://react-http-1fcac-default-rtdb.firebaseio.com/';
+  // const firebaseURl = ;
 
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${firebaseURl}/movies.json`);
+      const response = await fetch(`${FIREBASE_URL}/movies.json`);
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
@@ -45,7 +46,7 @@ function App() {
   }, [fetchMoviesHandler]);
 
   async function addMovieHandler(movie) {
-    const response = await fetch(`${firebaseURl}/movies.json`, {
+    const response = await fetch(`${FIREBASE_URL}/movies.json`, {
       method: 'POST',
       body: JSON.stringify(movie),
       headers: {
