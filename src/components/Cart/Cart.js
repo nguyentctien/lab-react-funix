@@ -6,7 +6,9 @@ import classes from './Cart.module.css';
 import CartContext from '../../store/cart-context';
 import Checkout from './Checkout';
 
-const Cart = (props) => {
+import { FIREBASE_URL } from '../../util/firebase-url';
+
+const Cart = props => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [didSubmit, setDidSubmit] = useState(false);
@@ -15,11 +17,11 @@ const Cart = (props) => {
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  const cartItemRemoveHandler = (id) => {
+  const cartItemRemoveHandler = id => {
     cartCtx.removeItem(id);
   };
 
-  const cartItemAddHandler = (item) => {
+  const cartItemAddHandler = item => {
     cartCtx.addItem(item);
   };
 
@@ -27,9 +29,9 @@ const Cart = (props) => {
     setIsCheckout(true);
   };
 
-  const submitOrderHandler = async (userData) => {
+  const submitOrderHandler = async userData => {
     setIsSubmitting(true);
-    await fetch('https://react-http-6b4a6.firebaseio.com/orders.json', {
+    await fetch(`${FIREBASE_URL}/orders.json`, {
       method: 'POST',
       body: JSON.stringify({
         user: userData,
@@ -43,7 +45,7 @@ const Cart = (props) => {
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {cartCtx.items.map((item) => (
+      {cartCtx.items.map(item => (
         <CartItem
           key={item.id}
           name={item.name}
@@ -89,10 +91,10 @@ const Cart = (props) => {
     <React.Fragment>
       <p>Successfully sent the order!</p>
       <div className={classes.actions}>
-      <button className={classes.button} onClick={props.onClose}>
-        Close
-      </button>
-    </div>
+        <button className={classes.button} onClick={props.onClose}>
+          Close
+        </button>
+      </div>
     </React.Fragment>
   );
 

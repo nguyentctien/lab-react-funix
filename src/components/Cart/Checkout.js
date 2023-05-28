@@ -2,10 +2,10 @@ import { useRef, useState } from 'react';
 
 import classes from './Checkout.module.css';
 
-const isEmpty = (value) => value.trim() === '';
-const isFiveChars = (value) => value.trim().length === 5;
+const isEmpty = value => value.trim() === '';
+const isFiveChars = value => value.trim().length <= 5;
 
-const Checkout = (props) => {
+const Checkout = props => {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -13,12 +13,12 @@ const Checkout = (props) => {
     postalCode: true,
   });
 
-  const nameInputRef = useRef();
-  const streetInputRef = useRef();
-  const postalCodeInputRef = useRef();
-  const cityInputRef = useRef();
+  const nameInputRef = useRef('');
+  const streetInputRef = useRef('');
+  const postalCodeInputRef = useRef('');
+  const cityInputRef = useRef('');
 
-  const confirmHandler = (event) => {
+  const confirmHandler = event => {
     event.preventDefault();
 
     const enteredName = nameInputRef.current.value;
@@ -29,8 +29,8 @@ const Checkout = (props) => {
     const enteredNameIsValid = !isEmpty(enteredName);
     const enteredStreetIsValid = !isEmpty(enteredStreet);
     const enteredCityIsValid = !isEmpty(enteredCity);
-    const enteredPostalCodeIsValid = isFiveChars(enteredPostalCode);
-
+    const enteredPostalCodeIsValid = !isFiveChars(enteredPostalCode);
+    console.log(enteredPostalCodeIsValid);
     setFormInputsValidity({
       name: enteredNameIsValid,
       street: enteredStreetIsValid,
@@ -47,7 +47,13 @@ const Checkout = (props) => {
     if (!formIsValid) {
       return;
     }
-
+    const inputV = {
+      name: enteredName,
+      street: enteredStreet,
+      city: enteredCity,
+      postalCode: enteredPostalCode,
+    };
+    console.log(inputV);
     props.onConfirm({
       name: enteredName,
       street: enteredStreet,
@@ -85,7 +91,7 @@ const Checkout = (props) => {
         <label htmlFor='postal'>Postal Code</label>
         <input type='text' id='postal' ref={postalCodeInputRef} />
         {!formInputsValidity.postalCode && (
-          <p>Please enter a valid postal code (5 characters long)!</p>
+          <p>Please enter a valid postal code (more than 5 characters)!</p>
         )}
       </div>
       <div className={cityControlClasses}>
