@@ -11,7 +11,7 @@ const MainNavigation = () => {
           <ul>
             <li>
               <NavLink
-                to='/'
+                to='quotes'
                 className={({ isActive }) => (isActive ? classes.active : '')}
               >
                 All Quotes
