@@ -1,5 +1,3 @@
-import { useRef, useState } from 'react';
-
 import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './QuoteForm.module.css';
@@ -10,33 +8,13 @@ import {
   useActionData,
   useNavigation,
 } from 'react-router-dom';
-import { FIREBASE_URL } from '../../util/firebase-url';
-const isEmpty = value => value.trim() === '';
+import { FIREBASE_URL, PARAM_JSON } from '../../util/firebase-url';
 
 const QuoteForm = props => {
-  const authorInputRef = useRef();
-  const textInputRef = useRef();
-
   const data = useActionData();
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
-  console.log(navigation);
-  // function submitFormHandler(event) {
-  //   event.preventDefault();
-
-  //   const enteredAuthor = authorInputRef.current.value;
-  //   const enteredText = textInputRef.current.value;
-
-  //   // optional: Could validate here
-  //   let isEmptyForm = isEmpty(enteredAuthor) || isEmpty(enteredText);
-  //   if (isEmptyForm) {
-  //     return;
-  //   }
-
-  //   props.onAddQuote({ author: enteredAuthor, text: enteredText });
-  //   alert('Add new quote success!');
-  // }
   return (
     <Card>
       <Form method='POST' className={classes.form}>
@@ -48,24 +26,11 @@ const QuoteForm = props => {
 
         <div className={classes.control}>
           <label htmlFor='author'>Author</label>
-          <input
-            type='text'
-            id='author'
-            name='author'
-            required
-
-            // ref={authorInputRef}
-          />
+          <input type='text' id='author' name='author' required />
         </div>
         <div className={classes.control}>
           <label htmlFor='text'>Text</label>
-          <textarea
-            id='text'
-            rows='5'
-            name='text'
-            required
-            // ref={textInputRef}
-          ></textarea>
+          <textarea id='text' rows='5' name='text' required></textarea>
           {/* err */}
           {data && data.errors && (
             <ul>
@@ -96,7 +61,7 @@ export async function action({ request, params }) {
     text: data.get('text'),
   };
 
-  const response = await fetch(`${FIREBASE_URL}/quote.json`, {
+  const response = await fetch(`${FIREBASE_URL}/${PARAM_JSON}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -110,5 +75,5 @@ export async function action({ request, params }) {
     throw json({ message: 'Could not save form' });
   }
   alert('Add new quote success.');
-  return { ok: true };
+  return redirect('/');
 }

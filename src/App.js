@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Root from './page/Root';
-import AllQuotes, { loader as loaderAllQuote } from './page/AllQuotes';
+import AllQuotes from './page/AllQuotes';
 import QuoteDetail from './page/QuoteDetail';
 import NewQuote from './page/NewQuote';
 import NotFound from './page/NotFound';
@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <NotFound />,
     children: [
-      { index: true, element: <AllQuotes />, loader: loaderAllQuote },
+      { index: true, element: <AllQuotes /> },
       {
         path: 'quotes',
         children: [
-          { index: true, element: <AllQuotes />, loader: loaderAllQuote },
+          { index: true, element: <AllQuotes /> },
           { path: ':quoteId', element: <QuoteDetail /> },
         ],
       },
