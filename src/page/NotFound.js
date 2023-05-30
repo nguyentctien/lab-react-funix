@@ -1,16 +1,15 @@
 import React from 'react';
-import { Outlet } from 'react-router';
 import Layout from '../components/layout/Layout';
 import MainNavigation from '../components/layout/MainNavigation';
-const Root = () => {
+const NotFound = () => {
   return (
-    <div>
-      {/* <MainNavigation /> */}
+    <>
       <Layout>
-        <Outlet />
+        <MainNavigation />
+        <p>Page not found</p>
       </Layout>
-    </div>
+    </>
   );
 };
 
-export default Root;
+export default NotFound;

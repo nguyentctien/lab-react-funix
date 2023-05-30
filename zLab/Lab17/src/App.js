@@ -4,7 +4,6 @@ import Root from './page/Root';
 import AllQuotes from './page/AllQuotes';
 import QuoteDetail from './page/QuoteDetail';
 import NewQuote from './page/NewQuote';
-import NotFound from './page/NotFound';
 // import NotFound from './pages/NotFound';
 // import Layout from './components/layout/Layout';
 
@@ -12,7 +11,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <NotFound />,
     children: [
       { index: true, element: <AllQuotes /> },
       {

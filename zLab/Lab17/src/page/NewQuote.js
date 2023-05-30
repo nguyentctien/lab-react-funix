@@ -1,11 +1,12 @@
 import React from 'react';
 import QuoteItem from '../components/quotes/QuoteItem';
-const AllQuotes = () => {
+
+const NewQuote = () => {
   return (
     <>
-      <QuoteItem text='All Quote Page' />
+      <QuoteItem text='New Quote' />
     </>
   );
 };
 
-export default AllQuotes;
+export default NewQuote;

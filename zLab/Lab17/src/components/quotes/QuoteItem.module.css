@@ -20,7 +20,7 @@
 }
 
 .item blockquote {
-  margin: 0;
+  margin: 0rem 0rem 6rem;
   text-align: left;
   font-size: 1.5rem;
   color: #212929;
@@ -29,9 +29,10 @@
 .item p {
   margin: 0;
   margin-bottom: 0.25rem;
+  font-weight: bold;
 }
 
 .item figcaption {
   font-style: italic;
-  color: #566d6d;
+  color: black;
 }
