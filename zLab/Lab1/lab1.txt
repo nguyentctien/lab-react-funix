@@ -1,3 +1,0 @@
-npx create-react-app <project-name>
-npm start
-Lab
