@@ -42,7 +42,7 @@ const QuoteForm = props => {
           {/*  */}
         </div>
         <div className={classes.actions}>
-          <button className='btn' disabled={isSubmitting}>
+          <button className={classes.btn} disabled={isSubmitting}>
             Add Quote
           </button>
         </div>
