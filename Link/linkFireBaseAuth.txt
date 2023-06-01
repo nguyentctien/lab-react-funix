@@ -1,0 +1,3 @@
+1. https://github.com/judygab/web-dev-projects-2/tree/react-firebase-auth
+3.
+https://github.com/FullstackSimplified/firebase-auth/blob/main/src/context/userContext.js
